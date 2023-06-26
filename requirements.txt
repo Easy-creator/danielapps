@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 django
 djangorestframework-simplejwt
 djangorestframework
-=======
-django
-djangorestframework-simplejwt
-djangorestframework
->>>>>>> ebe7595 (main)
 django-cors-headers
