@@ -25,4 +25,6 @@ class Products(models.Model):
         return self.name
     
     class Meta:
+        verbose_name = "Products"
+        verbose_name_plural = "Products"
         ordering = ('-date',)
