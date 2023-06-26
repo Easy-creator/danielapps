@@ -1,0 +1,7 @@
+/api/token/ === to get the access tokens and logging in
+/api/token/refresh/ === refresh tokens 
+/user/api/create === sign up
+/apiauth/ === django rest framework
+/api/ === products listing
+/api/<int:pk>/ === products details
+/user/api/logout/blacklist/ === logout users
