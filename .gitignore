@@ -6,3 +6,4 @@ venvorn/
 db.sqlite3
 *.pyc
 migrations/
+media/
