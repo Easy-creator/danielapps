@@ -5,3 +5,17 @@
 /api/ === products listing
 /api/<int:pk>/ === products details
 /user/api/logout/blacklist/ === logout users
+
+
+##pending endpoints
+
+add to cart
+blog post listing 
+blog post details *catergory models
+search functionality
+wishlist
+filtering and sorting
+payment endpoint (stripe)
+reset password, email confirmation
+seller info 
+rating of the products and blog
