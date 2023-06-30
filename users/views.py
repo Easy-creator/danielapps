@@ -1,42 +1,46 @@
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from .serializers import CustomUserSerializer
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import AllowAny
-from rest_framework.decorators import api_view
+from django.shortcuts import render
+from rest_framework.generics import GenericAPIView
+from rest_framework import response, status
+from users.serializers import RegisterationPoint, LoginSerializer
+from django.contrib.auth import authenticate
+from rest_framework.permissions import IsAuthenticated
 
 
-class CustomUserCreate(APIView):
-    permission_classes = [AllowAny]
-    #allowed_methods = ['POST', 'post']
+# Create your views here.
+class AuthUserApiView(GenericAPIView):
+    permission_classes = (IsAuthenticated,)
 
-    def post(self, request, format='json'):
-        serializer = CustomUserSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            if user:
-                json = serializer.data
-                return Response(json, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def get(self, request):
+        user = request.user
 
+        serializer = RegisterationPoint(user)
+        return response.Response({'user': serializer.data})
 
-class BlacklistTokenUpdateView(APIView):
-    permission_classes = [AllowAny]
-    authentication_classes = ()
+class RegisterApiView(GenericAPIView):
+    authentication_classes = []
+    serializers_class = RegisterationPoint
 
     def post(self, request):
-        try:
-            refresh_token = request.data["refresh_token"]
-            token = RefreshToken(refresh_token)
-            token.blacklist()
-            return Response(status=status.HTTP_205_RESET_CONTENT)
-        except Exception as e:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+        serializers = self.serializers_class(data=request.data)
 
-@api_view(["POST",])
-def logout_user(request):
-    if request.method == 'POST':
-        request.user.auth_token.delete()
-        return Response({"Message": "You are logged out"}, status=status.HTTP_200_OK)
+        if serializers.is_valid():
+            serializers.save()
+            return response.Response(serializers.data, status = status.HTTP_201_CREATED )
+        
+        return response.Response(serializers.errors, status = status.HTTP_400_BAD_REQUEST )
+
+class LoginApiView(GenericAPIView):
+    authentication_classes = []
+    serializer_class = LoginSerializer
+
+    def post(self, request):
+        email = request.data.get('email', None)
+        password = request.data.get('password', None)
+
+        user = authenticate(username = email, password = password)
+        
+        if user:
+            serializer = self.serializer_class(user)
+            return response.Response(serializer.data, status = status.HTTP_200_OK)
+        
+        return response.Response({"message": "Invalid Username or Password Please try again"}, status = status.HTTP_401_UNAUTHORIZED)
