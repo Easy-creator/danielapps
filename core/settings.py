@@ -133,7 +133,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 #     "http://127.0.0.1:5500",
 # ]
 
-AUTH_USER_MODEL = "users.NewUser"
+AUTH_USER_MODEL = "users.User"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/media/'

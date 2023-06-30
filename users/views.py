@@ -3,7 +3,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework import response, status
 from users.serializers import RegisterationPoint, LoginSerializer
 from django.contrib.auth import authenticate
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 
 # Create your views here.
@@ -19,6 +19,7 @@ class AuthUserApiView(GenericAPIView):
 class RegisterApiView(GenericAPIView):
     authentication_classes = []
     serializers_class = RegisterationPoint
+    permission_classes = [AllowAny]
 
     def post(self, request):
         serializers = self.serializers_class(data=request.data)
@@ -32,6 +33,7 @@ class RegisterApiView(GenericAPIView):
 class LoginApiView(GenericAPIView):
     authentication_classes = []
     serializer_class = LoginSerializer
+    permission_classes = [AllowAny]
 
     def post(self, request):
         email = request.data.get('email', None)
