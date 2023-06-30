@@ -9,6 +9,7 @@ urlpatterns = [
     path('api/', include('apis.urls', namespace='apis')),
     path('apiauth/', include('rest_framework.urls', namespace='rest_framework')),
     path('user/api/', include('users.urls', namespace='users')),
+    path('blog/api/', include('blog.urls', namespace='blog')),
 ]
 
 if settings.DEBUG or not settings.DEBUG:

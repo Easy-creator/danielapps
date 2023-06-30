@@ -1,0 +1,8 @@
+from blog.views import PostList
+from django.urls import path
+
+app_name = 'blog'
+
+urlpatterns = [
+    path('', PostList.as_view(), name='post_list')
+]
