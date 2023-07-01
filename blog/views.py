@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from blog.serializer import PostSerializer
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, RetrieveAPIView, CreateAPIView, ListAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from blog.models import BlogPost
 
