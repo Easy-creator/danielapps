@@ -24,7 +24,7 @@ class JWTAuthetication(BaseAuthentication):
             return (user, token)
 
         except jwt.ExpiredSignatureError as ex:
-            raise exceptions.AuthenticationFailed('Token has expired login again')
+            raise exceptions.AuthenticationFailed('Token has expired or ' + str(ex) + ' login again')
         
         except jwt.DecodeError as decode_error:
             raise exceptions.AuthenticationFailed('Invalid token login again')

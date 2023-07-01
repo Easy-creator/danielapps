@@ -1,4 +1,4 @@
-from blog.views import PostList, PostUpdate, PostUpdateDelete, PostCreate
+from blog.views import PostList, PostUpdate, PostUpdateDelete
 from django.urls import path
 
 app_name = 'blog'
