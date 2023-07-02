@@ -2,7 +2,11 @@
 /user/api/register/ === sign up
 /api/ === products listing
 /api/<int:pk>/ === products details
+
 /blog/api/ === blog post listing and creating post
+/blog/api/create/ === creates a post
+/blog/api/update/<int:id>/ to update a blog
+/blog/api/<int:id/ === to see a blog details
 
 
 ##pending endpoints

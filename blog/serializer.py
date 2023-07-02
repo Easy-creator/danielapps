@@ -7,9 +7,13 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PostSerializer(serializers.ModelSerializer):
-    category = CategorySerializer() 
+    category = CategorySerializer(read_only=True) 
 
     class Meta:
         model = BlogPost
         fields = ('title', 'category', 'date', 'post', 'updated')
 
+class PostCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BlogPost
+        fields = ('title', 'category', 'date', 'post', 'updated')
